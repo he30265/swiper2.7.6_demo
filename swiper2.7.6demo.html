@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>swiper2.7.6常用效果整理</title>
+</head>
+
+<script src="images/jquery-1.8.3.min.js"></script>
+<script src="images/idangerous.swiper2.7.6.min.js"></script>
+<link rel="stylesheet" href="images/idangerous.swiper2.7.6.css">
+<link rel="stylesheet" href="images/reset.css">
+
+
+<body style="padding: 20px;">
+
+
+
+<a href="https://2.swiper.com.cn/" title="" target="_blank">swiper2.7.6官网</a>
+
+<hr>
+
+<p><img src="images/IE8.png" alt="" style="max-width: 100%"></p>
+
+<hr>
+
+<table>
+    <tr>
+        <th colspan="3">swiper2.7.6常用参数</th>
+    </tr>
+    <tr>
+        <td>autoplay:</td>
+        <td>自动切换的时间间隔（单位ms），不设定该参数 slide 不会自动切换。</td>
+        <td>类型：number，默认：0。</td>
+    </tr>
+    <tr>
+        <td>loop:</td>
+        <td>循环，会在wrapper前后生成若干个 slides 让 slides 看起来是衔接的，用于无限循环切换。</td>
+        <td>类型：boolean，默认：false。</td>
+    </tr>
+    <tr>
+        <td>speed:</td>
+        <td>滑动速度，即slider自动滑动开始到结束的时间（单位ms）。</td>
+        <td>类型：number，默认：300。</td>
+    </tr>
+    <tr>
+        <td>slidesPerView:</td>
+        <td>设置slider容器能够同时显示的slides数量(carousel模式)。另外，支持'auto'值，会根据容器container的宽度调整slides数目。'auto'不兼容loop模式，除非你设置了loopedSlides。</td>
+        <td>类型：number or auto，默认：1。</td>
+    </tr>
+    <tr>
+        <td>calculateHeight:</td>
+        <td>当值为true时，Swiper根据slides内容计算容器高度。</td>
+        <td>类型：boolean，默认：false。</td>
+    </tr>
+    <tr>
+        <td>paginationClickable:</td>
+        <td>值为true时，点击分页器的指示点时会发生Swiper。</td>
+        <td>类型：boolean默认：false。</td>
+    </tr>
+</table>
+
+
+<hr>
+
+
+<!-- demo1：基础效果 -->
+<h1>1.swiper-基础效果</h1>
+<div class="swiper_demo swiper_demo1">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+        </div>
+    </div>
+    <div class="pagination"></div>
+    <div class="arrow">
+        <i class="arrow-left">left</i>
+        <i class="arrow-right">right</i>
+    </div>
+    <style>
+    .swiper_demo1 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo1 .swiper-slide { font-size: 24px; line-height: 250px; text-align: center; }
+    .swiper_demo1 .pagination { position: absolute; z-index: 1; bottom: 10px; left: 0; width: 100%; text-align: center; }
+    .swiper_demo1 .swiper-pagination-switch { display: inline-block; width: 10px; height: 10px; margin: 0 5px; cursor: pointer; border-radius: 50%; background-color: #fff; }
+    .swiper_demo1 .pagination .swiper-active-switch { background-color: #000; }
+    .swiper_demo1 .arrow i { position: absolute; z-index: 1; top: 50%; display: inline-block; cursor: pointer; }
+    .swiper_demo1 .arrow .arrow-left { left: 10px; }
+    .swiper_demo1 .arrow .arrow-right { right: 10px; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper1 = new Swiper('.swiper_demo1 .swiper-container', {
+            autoplay: 0,
+            loop: true,
+            speed: 500,
+            slidesPerView: 1,
+            calculateHeight: true,
+            pagination: '.swiper_demo1 .pagination',
+            paginationClickable: true,
+        });
+        $('.swiper_demo1 .arrow-left').on('click', function(e) {
+            e.preventDefault();
+            mySwiper1.swipePrev();
+        })
+        $('.swiper_demo1 .arrow-right').on('click', function(e) {
+            e.preventDefault();
+            mySwiper1.swipeNext();
+        })
+    });
+    </script>
+</div>
+<!-- demo1：基础效果 E -->
+
+
+<hr>
+
+
+<!-- demo2：列表效果 -->
+<h1>2.swiper-列表</h1>
+<div class="swiper_demo swiper_demo2">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+            <div class="swiper-slide" style="background-color: #973e76;">
+                swiper-slide4
+            </div>
+            <div class="swiper-slide" style="background-color: #ca4040;">
+                swiper-slide5
+            </div>
+        </div>
+    </div>
+    <div class="pagination"></div>
+    <div class="arrow">
+        <i class="arrow-left">left</i>
+        <i class="arrow-right">right</i>
+    </div>
+    <style>
+    .swiper_demo2 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo2 .swiper-slide { font-size: 24px; line-height: 250px; text-align: center; }
+    .swiper_demo2 .pagination { position: absolute; z-index: 1; bottom: 10px; left: 0; width: 100%; text-align: center; }
+    .swiper_demo2  .swiper-pagination-switch { display: inline-block; width: 10px; height: 10px; margin: 0 5px; cursor: pointer; border-radius: 50%; background-color: #fff; }
+    .swiper_demo2  .swiper-visible-switch { background-color: #aaa; }
+    .swiper_demo2  .swiper-active-switch { background-color: #222; }
+    .swiper_demo2 .arrow i { position: absolute; z-index: 1; top: 50%; display: inline-block; cursor: pointer; }
+    .swiper_demo2 .arrow .arrow-left { left: 10px; }
+    .swiper_demo2 .arrow .arrow-right { right: 10px; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper2 = new Swiper('.swiper_demo2 .swiper-container', {
+            autoplay: 0,
+            loop: true,
+            speed: 500,
+            slidesPerView: 3,
+            calculateHeight: true,
+            pagination: '.swiper_demo2 .pagination',
+            paginationClickable: true,
+        });
+        $('.swiper_demo2 .arrow-left').on('click', function(e) {
+            e.preventDefault();
+            mySwiper2.swipePrev();
+        })
+        $('.swiper_demo2 .arrow-right').on('click', function(e) {
+            e.preventDefault();
+            mySwiper2.swipeNext();
+        })
+    });
+    </script>
+</div>
+<!-- demo2：列表效果 E -->
+
+
+<hr>
+
+
+<!-- demo3：垂直滚动效果 -->
+<h1>3.swiper-垂直滚动</h1>
+<p>注：需要给 swiper-container 和 swiper-slide 设置高度。</p>
+<p>swiper-container 高度 = slidesPerView * swiper-slide 高度。</p>
+<div class="swiper_demo swiper_demo3">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+            <div class="swiper-slide" style="background-color: #973e76;">
+                swiper-slide4
+            </div>
+            <div class="swiper-slide" style="background-color: #ca4040;">
+                swiper-slide5
+            </div>
+        </div>
+    </div>
+    <div class="arrow">
+        <i class="arrow-up">up</i>
+        <i class="arrow-down">down</i>
+    </div>
+    <style>
+    .swiper_demo3 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo3 .swiper-container { height: 300px !important; }
+    .swiper_demo3 .swiper-slide { font-size: 24px; line-height: 100px; height: 100px; text-align: center; }
+    .swiper_demo3 .arrow i { position: absolute; z-index: 1; left: 50%; display: inline-block; cursor: pointer; }
+    .swiper_demo3 .arrow .arrow-up { top: 10px; }
+    .swiper_demo3 .arrow .arrow-down { bottom: 10px; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper3 = new Swiper('.swiper_demo3 .swiper-container', {
+            autoplay: 0,
+            loop: true,
+            speed: 500,
+            slidesPerView: 3,
+            calculateHeight: true,
+            mode:'vertical',
+        });
+        $('.swiper_demo3 .arrow-up').on('click', function(e) {
+            e.preventDefault();
+            mySwiper3.swipePrev();
+        })
+        $('.swiper_demo3 .arrow-down').on('click', function(e) {
+            e.preventDefault();
+            mySwiper3.swipeNext();
+        })
+    });
+    </script>
+</div>
+<!-- demo3：垂直滚动效果 E -->
+
+
+<hr>
+
+
+<!-- demo4：选项卡效果 -->
+<h1>4.swiper-选项卡效果</h1>
+<p>onlyExternal 为 true 时，slides滑动失效。</p>
+<div class="swiper_demo swiper_demo4">
+    <div class="tabs">
+        <a href="#" class="active">Tab 1</a>
+        <a href="#">Tab 2</a>
+        <a href="#">Tab 3</a>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee">
+                Tab 1 con
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430">
+                Tab 2 con
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604">
+                Tab 3 con
+            </div>
+        </div>
+    </div>
+    <style>
+    .swiper_demo4 { position: relative; width: 970px; margin: 0 auto; }
+    .swiper_demo4 .tabs a { margin-right: 20px; }
+    .swiper_demo4 .tabs a.active { color: #f00; }
+    .swiper_demo4 .swiper-slide { line-height: 100px; box-sizing: border-box; height: 100px; text-align: center; color: #fff; }
+    </style>
+    <script>
+    $(function() {
+        var tabsSwiper = new Swiper('.swiper_demo4 .swiper-container', {
+            speed: 500,
+            onlyExternal: false,
+            onSlideChangeStart: function() {
+                $(".tabs .active").removeClass('active')
+                $(".tabs a").eq(tabsSwiper.activeIndex).addClass('active')
+            }
+        });
+        $(".tabs a").on('touchstart mousedown', function(e) {
+            e.preventDefault();
+            $(".tabs .active").removeClass('active')
+            $(this).addClass('active');
+            tabsSwiper.swipeTo($(this).index())
+        });
+        $(".tabs a").click(function(e) {
+            e.preventDefault();
+        });
+    });
+    </script>
+</div>
+<!-- demo4：选项卡效果 E -->
+
+
+<hr>
+
+
+<!-- demo5：3D效果 -->
+<script src="images/idangerous.swiper.3dflow.js"></script>
+<link rel="stylesheet" href="images/idangerous.swiper.3dflow.css">
+<h1>5.swiper-3D效果</h1>
+<p>需要引入 idangerous.swiper.3dflow.js 和 idangerous.swiper.3dflow.css。</p>
+<p>rotate：slide 做 3d 旋转时 Y 轴的旋转角度。</p>
+<p>stretch：每个 slide 之间的拉伸值，越大 slide 靠得越紧。</p>
+<p>depth：slide 的位置深度，值越大z轴距离越远，看起来越小。</p>
+<p>shadows：产生了 3d 旋转的 slide 是否使用阴影。</p>
+<p>注：IE8 及 IE8以下不支持 3D 效果，变为列表模式。</p>
+<div class="swiper_demo swiper_demo5">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+            <div class="swiper-slide" style="background-color: #ca4040;">
+                swiper-slide4
+            </div>
+            <div class="swiper-slide" style="background-color: #973e76;">
+                swiper-slide5
+            </div>
+        </div>
+    </div>
+    <div class="arrow">
+        <i class="arrow-left">left</i>
+        <i class="arrow-right">right</i>
+    </div>
+    <style>
+    .swiper_demo5 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo5 .swiper-slide { font-size: 24px; line-height: 250px; text-align: center; }
+    .swiper_demo5 .arrow i { position: absolute; z-index: 1; top: 50%; display: inline-block; cursor: pointer; }
+    .swiper_demo5 .arrow .arrow-left { left: 10px; }
+    .swiper_demo5 .arrow .arrow-right { right: 10px; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper5 = new Swiper('.swiper_demo5 .swiper-container', {
+            autoplay: 0,
+            loop: true,
+            speed: 500,
+            slidesPerView: 3,
+            calculateHeight: true,
+            tdFlow: {
+              rotate : 0,
+              stretch :50,
+              depth: 120,
+              shadows : true
+            }
+        });
+        $('.swiper_demo5 .arrow-left').on('click', function(e) {
+            e.preventDefault();
+            mySwiper5.swipePrev();
+        })
+        $('.swiper_demo5 .arrow-right').on('click', function(e) {
+            e.preventDefault();
+            mySwiper5.swipeNext();
+        })
+    });
+    </script>
+</div>
+<!-- demo5：3D效果 E -->
+
+
+
+<hr>
+
+
+
+<!-- demo6：双轮播效果 -->
+<h1>6.swiper-双轮播效果</h1>
+<div class="swiper_demo swiper_demo6">
+    <!-- 轮播上 -->
+    <div class="swiper-container swiper_top">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+            <div class="swiper-slide" style="background-color: #ca4040;">
+                swiper-slide4
+            </div>
+            <div class="swiper-slide" style="background-color: #973e76;">
+                swiper-slide5
+            </div>
+        </div>
+    </div>
+    <div class="arrow">
+        <i class="arrow-left">left</i>
+        <i class="arrow-right">right</i>
+    </div>
+    <!-- 轮播上 E -->
+    <!-- 轮播下 -->
+    <div class="swiper-container swiper_bottom">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+            <div class="swiper-slide" style="background-color: #ca4040;">
+                swiper-slide4
+            </div>
+            <div class="swiper-slide" style="background-color: #973e76;">
+                swiper-slide5
+            </div>
+        </div>
+    </div>
+    <!-- 轮播下 E -->
+    <style>
+    .swiper_demo6 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo6 .swiper_top { margin-bottom: 20px; }
+    .swiper_demo6 .swiper_top .swiper-slide { font-size: 24px; line-height: 100px; text-align: center; }
+    .swiper_demo6 .swiper_bottom .swiper-slide { line-height: 50px; text-align: center; }
+    .swiper_demo6 .swiper_bottom .swiper-slide-active { color: #f00; }
+    .swiper_demo6 .arrow i { position: absolute; z-index: 1; top: 25%; display: inline-block; cursor: pointer; }
+    .swiper_demo6 .arrow .arrow-left { left: 10px; }
+    .swiper_demo6 .arrow .arrow-right { right: 10px; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper6top = new Swiper('.swiper_top', {
+            loop: false,
+            calculateHeight: true,
+            onSlideChangeStart: function(swiper) {
+                var ind = $(".swiper_top .swiper-slide").index($(".swiper_top .swiper-slide-active"));
+                mySwiper6bottom.swipeTo(ind, 1000, false);
+                $(".swiper_bottom .swiper-slide").removeClass("swiper-slide-active");
+                $(".swiper_bottom .swiper-slide").eq(ind).addClass("swiper-slide-active");
+            }
+        });
+        var mySwiper6bottom = new Swiper('.swiper_bottom', {
+            slidesPerView: 3,
+            loop: false,
+            noSwiping: true,
+            calculateHeight: true,
+        });
+        $('.swiper_demo6 .arrow-left').on('click', function(e) {
+            e.preventDefault()
+            mySwiper6top.swipePrev()
+            var ind = $(".swiper_top .swiper-slide").index($(".swiper_top .swiper-slide-active"));
+            mySwiper6bottom.swipeTo(ind, 1000, false);
+            $(".swiper_bottom .swiper-slide").removeClass("swiper-slide-active");
+            $(".swiper_bottom .swiper-slide").eq(ind).addClass("swiper-slide-active");
+        })
+        $('.swiper_demo6 .arrow-right').on('click', function(e) {
+            e.preventDefault()
+            mySwiper6top.swipeNext()
+            var ind = $(".swiper_top .swiper-slide").index($(".swiper_top .swiper-slide-active"));
+            mySwiper6bottom.swipeTo(ind, 1000, false);
+            $(".swiper_bottom .swiper-slide").removeClass("swiper-slide-active");
+            $(".swiper_bottom .swiper-slide").eq(ind).addClass("swiper-slide-active");
+        });
+
+        $(".swiper_demo6 .swiper_bottom .swiper-slide").click(function() {
+            $(".swiper_bottom .swiper-slide").removeClass("swiper-slide-active");
+            $(this).addClass("swiper-slide-active");
+            mySwiper6top.swipeTo($(this).index(), 1000, false);
+        })
+    });
+    </script>
+</div>
+<!-- demo6：双轮播效果 E -->
+
+
+
+<hr>
+
+
+
+<!-- demo7：添加数字分页效果1 -->
+<h1>7.swiper-添加数字分页效果1</h1>
+<p>swiper2 中没有数字分页的属性，可通过 js 动态向 pagination 中添加顺序号。</p>
+<div class="swiper_demo swiper_demo7">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+        </div>
+    </div>
+    <div class="pagination"></div>
+    <style>
+    .swiper_demo7 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo7 .swiper-slide { font-size: 24px; line-height: 250px; text-align: center; }
+    .swiper_demo7 .pagination { position: absolute; z-index: 1; bottom: 10px; left: 0; width: 100%; text-align: center; }
+    .swiper_demo7 .swiper-pagination-switch { line-height: 20px; display: inline-block; width: 20px; height: 20px; margin: 0 5px; cursor: pointer; text-align: center; color: #000; background-color: #eee; }
+    .swiper_demo7 .pagination .swiper-active-switch { background-color: #a0a0a0; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper7 = new Swiper('.swiper_demo7 .swiper-container', {
+            autoplay: 0,
+            loop: true,
+            speed: 500,
+            slidesPerView: 1,
+            calculateHeight: true,
+            pagination: '.swiper_demo7 .pagination',
+            paginationClickable: true,
+        });
+        var page_list = $(".swiper_demo7 .pagination span");
+        for (var i = 0; i < page_list.length; i++) {
+            page_list.eq(i).text(i + 1);
+        }
+    });
+    </script>
+</div>
+<!-- demo7：添加数字分页效果1 E -->
+
+
+
+<hr>
+
+
+
+<!-- demo8：添加数字分页效果2 -->
+<h1>8.swiper-添加数字分页效果2</h1>
+<p>swiper2 中没有数字分页的属性，可通过 js 动态向 pagination 中添加顺序号。</p>
+<div class="swiper_demo swiper_demo8">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #4390ee;">
+                swiper-slide1
+            </div>
+            <div class="swiper-slide" style="background-color: #ff8604;">
+                swiper-slide2
+            </div>
+            <div class="swiper-slide" style="background-color: #49a430;">
+                swiper-slide3
+            </div>
+        </div>
+    </div>
+    <div class="pagination"></div>
+    <div class="page_text"></div>
+    <style>
+    .swiper_demo8 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo8 .swiper-slide { font-size: 24px; line-height: 250px; text-align: center; }
+    .swiper_demo8 .pagination { position: absolute; z-index: 1; bottom: 10px; left: 0; width: 100%; text-align: center; }
+    .swiper_demo8 .page_text { position: absolute; z-index: 1; right: 10px; bottom: 10px; }
+    .swiper_demo8 .swiper-pagination-switch { display: inline-block; width: 10px; height: 10px; margin: 0 5px; cursor: pointer; border-radius: 50%; background-color: #fff; }
+    .swiper_demo8 .pagination .swiper-active-switch { background-color: #000; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper8 = new Swiper('.swiper_demo8 .swiper-container', {
+            autoplay: 0,
+            loop: true,
+            speed: 500,
+            slidesPerView: 1,
+            calculateHeight: true,
+            pagination: '.swiper_demo8 .pagination',
+            paginationClickable: true,
+            onSlideChangeStart: function(swiper) {
+                pageTextFun();
+            }
+        });
+        pageTextFun = function() {
+            var page_length = $(".swiper_demo8 .swiper-pagination-switch").length;
+            var now_page = $(".swiper_demo8 .swiper-active-switch").index() + 1;
+            $(".swiper_demo8 .page_text").text(now_page + '/' + page_length);
+        }
+        pageTextFun();
+    });
+    </script>
+</div>
+<!-- demo8：添加数字分页效果2 E -->
+
+
+<hr>
+
+
+<!-- demo9：根据容器 container 的宽度调整 slides 数目 -->
+<h1>9.swiper-根据容器 container 的宽度调整 slides 数目</h1>
+<div class="swiper_demo swiper_demo9">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" >
+                <p style="background-color: #4390ee;">swiper-slide1</p>
+            </div>
+            <div class="swiper-slide" >
+                <p style="background-color: #ff8604;">swiper-slide2</p>
+            </div>
+            <div class="swiper-slide" >
+                <p style="background-color: #49a430;">swiper-slide3</p>
+            </div>
+        </div>
+    </div>
+    <div class="arrow">
+        <i class="arrow-left">left</i>
+        <i class="arrow-right">right</i>
+    </div>
+    <style>
+    .swiper_demo9 { position: relative; width: 970px; margin: 20px auto; color: #fff; }
+    .swiper_demo9 .swiper-slide { font-size: 24px; line-height: 250px; width: 400px; padding: 0 20px; text-align: center; }
+    .swiper_demo9 .arrow i { position: absolute; z-index: 1; top: 40%; display: inline-block; cursor: pointer; }
+    .swiper_demo9 .arrow .arrow-left { left: 10px; }
+    .swiper_demo9 .arrow .arrow-right { right: 10px; }
+    </style>
+    <script>
+    $(function() {
+        var mySwiper9 = new Swiper('.swiper_demo9 .swiper-container', {
+            autoplay: 0,
+            loop: true,
+            speed: 500,
+            slidesPerView: "auto",
+            calculateHeight: true,
+            centeredSlides: true,
+        });
+        $('.swiper_demo9 .arrow-left').on('click', function(e) {
+            e.preventDefault();
+            mySwiper9.swipePrev();
+        })
+        $('.swiper_demo9 .arrow-right').on('click', function(e) {
+            e.preventDefault();
+            mySwiper9.swipeNext();
+        })
+    });
+    </script>
+</div>
+<!-- demo9：添加数字分页效果2 E -->
+
+
+
+</body>
+</html>
